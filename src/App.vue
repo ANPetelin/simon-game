@@ -1,28 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Game</h1>
+    <div class = "grid">
+    <GameField />
+    <Information />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GameField from './components/GameField';
+import Information from './components/Information';
 
 export default {
   name: 'App',
+  data() {
+    return {      
+      segments:[
+        {id: 1, color: "red"},
+        {id: 2, color: "blue"},
+        {id: 3, color: "yellow"},
+        {id: 4, color: "green"}
+      ]
+    }
+  },
   components: {
-    HelloWorld
+    GameField,
+    Information
+  },
+  methods: {
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    width: 540px;
+    margin: 0 auto;    
+}
+.grid {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-gap: 1em;
+}
+h1 {
+    margin: 1em 0 2em;
+    text-align: center;
 }
 </style>
