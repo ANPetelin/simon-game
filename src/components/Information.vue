@@ -1,6 +1,6 @@
 <template>  
 <div class = "information">
-    <h2>Raund: {{roundNumber}}</h2>
+    <h2>Round: {{roundNumber}}</h2>
     <button class = "button" >Start</button>
     <div class="game-options">
 			<h2>Game Options:</h2>

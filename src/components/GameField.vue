@@ -25,20 +25,26 @@ export default {
             switch(title) {
                 case 1:
                     this.clickOnRed = this.clickOnRed + ' ' + 'clickOnLi';
-                    // let audioRed = new Audio('../mp3/1');
-                    // audioRed.play();
+                    let audio = new Audio('mp3/1.mp3');
+                    audio.play();
                     setTimeout(() => this.clickOnRed = 'red', 500);                    
                     break;
                 case 2:
                     this.clickOnBlue = this.clickOnBlue + ' ' + 'clickOnLi';
+                    let audio2 = new Audio('mp3/2.mp3');
+                    audio2.play();
                     setTimeout(() => this.clickOnBlue = 'blue', 500);
                     break;
                 case 3:
                     this.clickOnYellow = this.clickOnYellow + ' ' + 'clickOnLi';
+                    let audio3 = new Audio('mp3/3.mp3');
+                    audio3.play();
                     setTimeout(() => this.clickOnYellow = 'yellow', 500);
                     break;
                 case 4:
                     this.clickOnGreen = this.clickOnGreen + ' ' + 'clickOnLi';
+                    let audio4 = new Audio('mp3/4.mp3');
+                    audio4.play();
                     setTimeout(() => this.clickOnGreen = 'green', 500);
                     break;
                 default:
