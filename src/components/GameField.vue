@@ -1,17 +1,21 @@
 <template>
+<div>
     <div class = "simon">
         <ul>
             <li :class="clickOnRed" tile="1" @click="clickHandler(1)"></li>
             <li :class="clickOnBlue" tile="2" @click="clickHandler(2)"></li>
             <li :class="clickOnYellow" tile="3" @click="clickHandler(3)"></li>
             <li :class="clickOnGreen" tile="4" @click="clickHandler(4)"></li>
-        </ul>
+        </ul>              
+    </div>
+    <button @click="test">проиграть</button>  
     </div>
 </template>
 
 <script>
 
 export default {
+    props: ['task', 'level'],
     data() {
         return{
             clickOnRed: 'red',
@@ -21,7 +25,24 @@ export default {
         }
     },
     methods: {
+        test () {
+            this.task.forEach(element => {
+                this.clickHandler(element);
+            });
+        },
+        sleep(milliseconds) {
+            const date = Date.now();
+            let currentDate = null;
+            do {
+                currentDate = Date.now();
+            } while (currentDate - date < milliseconds);
+        },
         clickHandler(title) {
+                let pause = null;
+                if (this.level == 'легкий') pause = 1500;
+                else if (this.level == 'средний') pause = 1000;
+                else if (this.level == 'тяжелый') pause = 400;
+
             switch(title) {
                 case 1:
                     this.clickOnRed = this.clickOnRed + ' ' + 'clickOnLi';
