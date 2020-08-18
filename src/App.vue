@@ -55,7 +55,7 @@ export default {
         }
       }
       if (miss) {
-        this.message = 'Вы проиграли на '+ this.round + ' раунде';
+        this.changeMessage('Вы проиграли на '+ this.round + ' раунде');
         this.round = 0;
         this.moveTransition();
         this.task = [];
@@ -65,7 +65,7 @@ export default {
         this.round = this.round + 1;
         this.moveTransition();
         this.playerAnsuer = [];
-        this.message = 'Ход компьютера';
+        this.changeMessage('Ход компьютера');
         setTimeout(() => this.gameStart(), 1000);
       }
       
@@ -77,7 +77,7 @@ export default {
       this.level = level;
     },
     onStart() {
-      this.level ? this.gameStart() : this.message = 'Установите уровень сложности';
+      this.level ? this.gameStart() : this.changeMessage('Установите уровень сложности');
     },
     gameStart() {
       if (!this.playerStep) {
