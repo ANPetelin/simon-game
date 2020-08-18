@@ -1,13 +1,18 @@
 <template>
   <div id="app">
     <h1>Game</h1>
-    <h4>{{level != '' ? 'Выбран '  + level + ' уровень сложности': 'Выберете уровень сложности'}}</h4>
     <div class = "grid">
-    <GameField 
+    <GameField     
+    :playerStep="playerStep" 
     :task="task"
     :level="level"
+    ref="GameField"
+    @moveTransition="moveTransition"
+    @onPlayerStep="onPlayerStep"
+    @changeMessage="changeMessage"
     />
-    <Information     
+    <Information
+    :message="message"     
     :round="round"
     @changeLevel="changeLevel"
     @onStart="onStart"/>
@@ -24,27 +29,62 @@ export default {
   data() {
     return {    
       round: 0,
+      playerStep: false,
       level: '',
-      task: [1,2,4,3],
+      task: [],
       playerAnsuer: [],
-      segments:[
-        {id: 1, color: "red"},
-        {id: 2, color: "blue"},
-        {id: 3, color: "yellow"},
-        {id: 4, color: "green"}
-      ]
+      message: '',
+      segments:[,,,]
     }
   },
   components: {
     GameField,
     Information
   },
-  methods: {
+  methods: {    
+    changeMessage (message) {
+      this.message = message;
+    },
+    onPlayerStep (step) {
+      let miss = false;
+      let newStepPlayer = step;
+      this.playerAnsuer.push(newStepPlayer);
+      for (let i=0; i<this.playerAnsuer.length; i++) {
+        if (this.playerAnsuer[i] != this.task[i]) {
+          miss = true;
+        }
+      }
+      if (miss) {
+        this.message = 'Вы проиграли на '+ this.round + ' раунде';
+        this.round = 0;
+        this.moveTransition();
+        this.task = [];
+        this.playerAnsuer = [];        
+      }
+      else if (this.playerAnsuer.length === this.task.length) {
+        this.round = this.round + 1;
+        this.moveTransition();
+        this.playerAnsuer = [];
+        this.message = 'Ход компьютера';
+        setTimeout(() => this.gameStart(), 1000);
+      }
+      
+    },
+    moveTransition () {
+      this.playerStep = !this.playerStep;
+    },
     changeLevel(level) {
       this.level = level;
     },
     onStart() {
-      console.log('kdhvcb');
+      this.level ? this.gameStart() : this.message = 'Установите уровень сложности';
+    },
+    gameStart() {
+      if (!this.playerStep) {
+        let newTask = Math.ceil(Math.random()*this.segments.length);
+        this.task.push(newTask);
+        this.$refs.GameField.computerStep();
+      }      
     }
   }
 }

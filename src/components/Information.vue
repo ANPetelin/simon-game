@@ -17,11 +17,10 @@
 
 <script>
 export default {
-  props: ['round'],
+  props: ['round', 'message'],
   data() {
       return {
-        picked: '',
-        message: '',
+        picked: ''
       }    
   }, 
   methods: {
